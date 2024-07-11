@@ -9,7 +9,7 @@
     </template>
     <template #default>
       <div class="setPanenl">
-     <!--  -->
+        <LowCodeMain />
       </div>
     </template>
     <template #footer>
@@ -25,23 +25,24 @@
 <script setup>
 import { ref } from 'vue';
 import { ElButton, ElDrawer } from 'element-plus'
+import LowCodeMain from './lowCodeMain.vue';
 
 
 const drawer2 = ref(false)
 
 
 // 打开配置页面
-const openDrawer = ()=>{
+const openDrawer = () => {
   drawer2.value = true
 }
 
 // 取消
-const cancelClick = ()=> {
+const cancelClick = () => {
   drawer2.value = false
 }
 
 // 保存配置数据
-const confirmClick = ()=> {
+const confirmClick = () => {
   drawer2.value = false
 
 }
@@ -55,7 +56,8 @@ const confirmClick = ()=> {
 .mainPage {
   padding: 8px;
 }
-.setPanenl{
+
+.setPanenl {
   height: 100%;
   width: 100%;
 }
