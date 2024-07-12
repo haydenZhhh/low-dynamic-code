@@ -19,37 +19,29 @@
       </div>
     </template>
   </el-drawer>
-
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { ElButton, ElDrawer } from 'element-plus'
+import { ElButton, ElDrawer } from 'element-plus';
 import LowCodeMain from './lowCodeMain.vue';
 
-
-const drawer2 = ref(false)
-
+const drawer2 = ref(false);
 
 // 打开配置页面
 const openDrawer = () => {
-  drawer2.value = true
-}
+  drawer2.value = true;
+};
 
 // 取消
 const cancelClick = () => {
-  drawer2.value = false
-}
+  drawer2.value = false;
+};
 
 // 保存配置数据
 const confirmClick = () => {
-  drawer2.value = false
-
-}
-
-
-
-
+  drawer2.value = false;
+};
 </script>
 
 <style scoped>
