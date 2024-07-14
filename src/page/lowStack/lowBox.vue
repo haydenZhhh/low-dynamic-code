@@ -11,8 +11,9 @@
 
 <script setup>
 import { useDrag } from 'vue3-dnd';
-import { computed, unref, defineProps } from 'vue';
+import { computed, unref, defineProps,onUnmounted } from 'vue';
 import { toRefs } from '@vueuse/core';
+import emitter from '../../utils/emitter'
 
 const props = defineProps({
   name: String,
@@ -35,7 +36,9 @@ const [collect, drag] = useDrag(() => ({
   end: (item, monitor) => {
     const dropResult = monitor.getDropResult();
     if (item && dropResult) {
-      alert(`You dropped ${item.name} into ${dropResult.name}!`);
+      // 拖动动作完成
+      // alert(`You dropped ${item.name} into ${dropResult.name}!`);
+      emitter.emit('finishDrag','完成拖拽！')
     }
   },
   collect: (monitor) => ({
@@ -47,6 +50,9 @@ const [collect, drag] = useDrag(() => ({
 const { isDragging } = toRefs(collect);
 
 const opacity = computed(() => (unref(isDragging) ? 0.4 : 1));
+onUnmounted(() => {
+  emitter.all.clear()
+});
 </script>
 
 <style scoped>

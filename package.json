@@ -10,9 +10,11 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "element-plus": "^2.7.6",
+    "mitt": "^3.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "vue": "^3.0.0",
-    "vue3-dnd": "^2.1.0"
+    "vue3-dnd": "^2.1.0",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.10",
