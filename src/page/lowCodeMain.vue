@@ -40,6 +40,7 @@
         :animation="150"
         group="people"
         class="rightBox"
+        ghostClass="ghost"
       >
         <div
           v-for="item in list2"
@@ -230,5 +231,9 @@ watchEffect(() => {
 }
 .dragClass {
   background-color: red;
+}
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
 }
 </style>
