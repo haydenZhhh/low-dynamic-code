@@ -51,6 +51,7 @@
           <div class="renderPanenl">
             {{ item.name }}
           </div>
+          <div class="closePanenl">66</div>
         </div>
       </VueDraggable>
     </div>
@@ -235,5 +236,14 @@ watchEffect(() => {
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;
+}
+.closePanenl {
+  position: relative;
+  right: 20px;
+  bottom: -45px;
+  z-index: 999;
+  height: 20px;
+  width: 40px;
+  background-color: green;
 }
 </style>
