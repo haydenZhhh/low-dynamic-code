@@ -1,21 +1,54 @@
 <template>
   <div class="codeMain">
     <div class="componentStack">
-      <VueDraggable v-model="list1" :animation="150" :group="{ name: 'people', pull: 'clone', put: false }"
-        :sort="false" class="leftBox" @clone="onClone">
+      <div class="title">基础组件</div>
+      <VueDraggable
+        v-model="list1"
+        :animation="150"
+        :group="{ name: 'people', pull: 'clone', put: false }"
+        :sort="false"
+        dragClass="dragClass"
+        class="leftBox"
+        @clone="onClone"
+        @end="endEnvent"
+      >
         <div v-for="item in list1" :key="item.id" class="chooseBox">
+          {{ item.name }}
+        </div>
+      </VueDraggable>
+      <br />
+      <br />
+      <div class="title">高级组件</div>
+      <VueDraggable
+        v-model="list3"
+        :animation="150"
+        :group="{ name: 'people', pull: 'clone', put: false }"
+        :sort="false"
+        dragClass="dragClass"
+        class="leftBox"
+        @clone="onClone"
+        @end="endEnvent"
+      >
+        <div v-for="item in list3" :key="item.id" class="chooseBox">
           {{ item.name }}
         </div>
       </VueDraggable>
     </div>
     <div class="showcodeComponent">
-      <VueDraggable v-model="list2" :animation="150" group="people" class="rightBox">
-        <div v-for="item in list2" :key="item.id" class="showBox">
-          <div class="text">
+      <VueDraggable
+        v-model="list2"
+        :animation="150"
+        group="people"
+        class="rightBox"
+      >
+        <div
+          v-for="item in list2"
+          :key="item.id"
+          :class="{ chooseKey: item.id === chooseId, showBox: true }"
+          @click="chooseTab(item)"
+        >
+          <div class="renderPanenl">
             {{ item.name }}
-          </div>
-          <div class="closePanenl">
-            关闭
           </div>
         </div>
       </VueDraggable>
@@ -25,38 +58,67 @@
 </template>
 
 <script setup>
-import { ref, watchEffect } from 'vue'
-import { VueDraggable } from 'vue-draggable-plus'
+import { ref, watchEffect } from 'vue';
+import { VueDraggable } from 'vue-draggable-plus';
 
+const chooseId = ref('');
 
 const list1 = ref([
   {
     name: 'Joao',
-    id: '1'
+    id: '1',
   },
   {
     name: 'Jean',
-    id: '2'
+    id: '2',
   },
   {
     name: 'Johanna',
-    id: '3'
+    id: '3',
   },
   {
     name: 'Juan',
-    id: '4'
-  }
-])
+    id: '4',
+  },
+]);
+
+const list3 = ref([
+  {
+    name: '看看',
+    id: '1',
+  },
+  {
+    name: '方法',
+    id: '2',
+  },
+  {
+    name: '打点',
+    id: '3',
+  },
+  {
+    name: '嗯嗯',
+    id: '4',
+  },
+]);
+
 const list2 = ref(
-  list1.value.map(item => ({
+  list1.value.map((item) => ({
     name: `${item.name}-2`,
-    id: `${item.id}-2`
+    id: `${item.id}-2`,
   }))
-)
+);
+
+const chooseTab = (val) => {
+  chooseId.value = val.id;
+};
+
+const endEnvent = (val) => {
+  console.log('ppppp44', val, list2.value);
+};
 
 function onClone() {
-  console.log('===', list2.value)
-  console.log('clone')
+  console.log('===', list2.value);
+  console.log('clone');
 }
 // function remove(index) {
 //   list2.value.splice(index, 1)
@@ -65,7 +127,6 @@ function onClone() {
 watchEffect(() => {
   console.log(list2.value);
 });
-
 </script>
 
 <style scoped>
@@ -75,26 +136,27 @@ watchEffect(() => {
   display: flex;
   flex-direction: row;
   overflow-y: hidden;
+  background-color: #fff;
 }
 
 .componentStack {
-  width: 20vw;
+  width: 20%;
   height: 100%;
-  padding: 10px;
+  padding: 20px;
   overflow-y: auto;
 }
 
 .showcodeComponent {
-  width: 60vw;
-  background-color: rgb(237, 239, 243);
+  width: 60%;
+  background-color: rgb(245, 245, 245);
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-
+  padding: 10px;
 }
 
 .configurationArea {
-  width: 20vw;
+  width: 20%;
   /* background-color: aqua; */
   height: 100%;
 }
@@ -103,44 +165,70 @@ watchEffect(() => {
   /* height: 100%; */
   width: 100%;
   display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.basicComponents {
+  display: flex;
   flex-direction: row;
   gap: 10px;
   flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 .rightBox {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .chooseBox {
   height: 20px;
-  width: 30%;
+  width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid blue;
+  background-color: rgb(244, 246, 252);
   cursor: move;
+  padding: 8px;
 }
 
 .showBox {
   height: 100px;
-  width: 90%;
-  border: 1px solid red;
+  width: 100%;
+  background-color: white;
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 10px;
+  cursor: move;
 }
-
-.text {
-  width: 90%;
+.chooseKey {
+  background-color: rgb(175, 223, 245);
 }
-
-.closePanenl {
-  width: 8%;
+.renderPanenl {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+.title {
+  font-weight: bold;
+}
+.showComponents {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.dragClass {
+  background-color: red;
 }
 </style>

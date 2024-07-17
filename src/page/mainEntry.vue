@@ -52,5 +52,7 @@ const confirmClick = () => {
 .setPanenl {
   height: 100%;
   width: 100%;
+  background-color: rgb(245, 245, 245);
+  padding: 8px;
 }
 </style>
