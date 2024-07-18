@@ -2,41 +2,70 @@
   <div class="codeMain">
     <div class="componentStack">
       <div class="title">基础组件</div>
-      <VueDraggable v-model="list1" :animation="150" :group="{ name: 'people', pull: 'clone', put: false }"
-        :sort="false" dragClass="dragClass" class="leftBox " @clone="onClone" @end="endEnvent">
-        <div v-for="item in list1" :key="item.id" class="chooseBox">
+      <VueDraggable
+        v-model="basiclist"
+        :animation="150"
+        :group="{ name: 'people', pull: 'clone', put: false }"
+        :sort="false"
+        dragClass="dragClass"
+        class="leftBox"
+        :clone="onClone"
+        @end="endEnvent"
+      >
+        <div v-for="item in basiclist" :key="item.id" class="chooseBox">
           {{ item.name }}
         </div>
       </VueDraggable>
       <br />
       <br />
       <div class="title">高级组件</div>
-      <VueDraggable v-model="list3" :animation="150" :group="{ name: 'people', pull: 'clone', put: false }"
-        :sort="false" dragClass="dragClass" class="leftBox " @clone="onClone" @end="endEnvent">
-        <div v-for="item in list3" :key="item.id" class="chooseBox">
+      <VueDraggable
+        v-model="highOrderList"
+        :animation="150"
+        :group="{ name: 'people', pull: 'clone', put: false }"
+        :sort="false"
+        dragClass="dragClass"
+        class="leftBox"
+        :clone="onClone"
+        @end="endEnvent"
+      >
+        <div v-for="item in highOrderList" :key="item.id" class="chooseBox">
           {{ item.name }}
         </div>
       </VueDraggable>
     </div>
     <div class="showcodeComponent">
-      <VueDraggable v-model="list2" :animation="150" group="people" @onAdd="afterAdd" class="rightBox "
-        ghostClass="ghost">
-        <div v-for="item in list2" :key="item.id" :class="{ chooseKey: item.id === chooseId, showBox: true }"
-          @click="chooseTab(item)">
+      <VueDraggable
+        v-model="configurationList"
+        :animation="150"
+        group="people"
+        class="rightBox"
+        ghostClass="ghost"
+      >
+        <div
+          v-for="item in configurationList"
+          :key="item.id"
+          :class="{ chooseKey: item.id === chooseId, showBox: true }"
+          @click="chooseTab(item)"
+        >
           <div class="renderPanenl">
             {{ item.name }}
           </div>
-          <div v-if="item.id === chooseId" class="closePanenl ">
-
-            <el-popconfirm confirm-button-text="是" cancel-button-text="否" @confirm="confirmEvent(item)" title="确认删除?">
+          <div v-if="item.id === chooseId" class="closePanenl">
+            <el-popconfirm
+              confirm-button-text="是"
+              cancel-button-text="否"
+              @confirm="confirmEvent(item)"
+              title="确认删除?"
+            >
               <template #reference>
                 <el-icon>
-                  <Delete style="height: 20px;width: 20px;color: rgb(251,83,86)" />
+                  <Delete
+                    style="height: 20px; width: 20px; color: rgb(251, 83, 86)"
+                  />
                 </el-icon>
               </template>
             </el-popconfirm>
-
-
           </div>
         </div>
       </VueDraggable>
@@ -48,81 +77,46 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus';
-import { Delete } from '@element-plus/icons-vue'
+import { Delete } from '@element-plus/icons-vue';
 import { ElPopconfirm } from 'element-plus';
+import lowCodeConfig from '../global.js';
 
+// 此刻选中的组件id
 const chooseId = ref('');
+// 基础组件
+const basiclist = ref(lowCodeConfig.basic);
+// 高阶组件
+const highOrderList = ref(lowCodeConfig.highOrder);
 
-const list1 = ref([
-  {
-    name: 'Joao',
-    id: '1',
-  },
-  {
-    name: 'Jean',
-    id: '2',
-  },
-  {
-    name: 'Johanna',
-    id: '3',
-  },
-  {
-    name: 'Juan',
-    id: '4',
-  },
-]);
+const configurationList = ref([]);
 
-const list3 = ref([
-  {
-    name: '看看',
-    id: '8',
-  },
-  {
-    name: '方法',
-    id: '9',
-  },
-  {
-    name: '打点',
-    id: '12',
-  },
-  {
-    name: '嗯嗯',
-    id: '15',
-  },
-]);
-
-const list2 = ref([]
-  // list1.value.map((item) => ({
-  //   name: `${item.name}-2`,
-  //   id: `${item.id}-2`,
-  // }))
-);
-const afterAdd = (val) => {
-  console.log('hhhh', val, list2.value)
-}
-
+// 点击渲染的组件
 const chooseTab = (val) => {
   chooseId.value = val.id;
 };
 
-const endEnvent = () => {
+// 结束拖拽
+const endEnvent = () => {};
 
+// 删除确定操作
+const confirmEvent = (val) => {
+  configurationList.value = configurationList.value.filter(
+    (item) => item.id !== val.id
+  );
+  chooseId.value = '';
 };
 
-const confirmEvent = (val) => {
-  console.log('===', val)
-  list2.value = list2.value.filter((item) => item.id !== val.id)
-  chooseId.value = ''
-}
-
-const onClone = (val) => {
-  console.log('===', list2.value);
-  console.log('clone', val);
-}
-
+// 复制
+const onClone = (element) => {
+  const len = configurationList.value.length;
+  return {
+    name: `${element.name}-clone-${len}`,
+    id: `${element.id}-clone-${len}`,
+  };
+};
 
 watchEffect(() => {
-  console.log(list2.value);
+  console.log('最终', configurationList.value);
 });
 </script>
 
@@ -189,11 +183,12 @@ watchEffect(() => {
   height: 18px;
   width: 25%;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   background-color: rgb(244, 246, 252);
   cursor: move;
   padding: 8px;
+  font-size: 13px;
 }
 
 .showBox {
