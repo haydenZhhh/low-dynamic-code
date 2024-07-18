@@ -5,7 +5,7 @@
       <VueDraggable
         v-model="basiclist"
         :animation="150"
-        :group="{ name: 'people', pull: 'clone', put: false }"
+        :group="{ name: 'lowCode', pull: 'clone', put: false }"
         :sort="false"
         dragClass="dragClass"
         class="leftBox"
@@ -13,6 +13,9 @@
         @end="endEnvent"
       >
         <div v-for="item in basiclist" :key="item.id" class="chooseBox">
+          <el-icon style="margin-right: 4px">
+            <component :is="item.iconName" />
+          </el-icon>
           {{ item.name }}
         </div>
       </VueDraggable>
@@ -22,7 +25,7 @@
       <VueDraggable
         v-model="highOrderList"
         :animation="150"
-        :group="{ name: 'people', pull: 'clone', put: false }"
+        :group="{ name: 'lowCode', pull: 'clone', put: false }"
         :sort="false"
         dragClass="dragClass"
         class="leftBox"
@@ -38,7 +41,7 @@
       <VueDraggable
         v-model="configurationList"
         :animation="150"
-        group="people"
+        group="lowCode"
         class="rightBox"
         ghostClass="ghost"
       >
@@ -70,7 +73,9 @@
         </div>
       </VueDraggable>
     </div>
-    <div class="configurationArea"></div>
+    <div class="configurationArea">
+      <Allocation />
+    </div>
   </div>
 </template>
 
@@ -80,6 +85,7 @@ import { VueDraggable } from 'vue-draggable-plus';
 import { Delete } from '@element-plus/icons-vue';
 import { ElPopconfirm } from 'element-plus';
 import lowCodeConfig from '../global.js';
+import Allocation from './allocation/index.vue';
 
 // 此刻选中的组件id
 const chooseId = ref('');
@@ -110,8 +116,8 @@ const confirmEvent = (val) => {
 const onClone = (element) => {
   const len = configurationList.value.length;
   return {
-    name: `${element.name}-clone-${len}`,
-    id: `${element.id}-clone-${len}`,
+    name: `${element.name}`,
+    id: `${element.id}-${len}`,
   };
 };
 
@@ -131,14 +137,16 @@ watchEffect(() => {
 }
 
 .componentStack {
-  width: 20%;
+  min-width: 250px;
+  width: 12%;
   height: 100%;
   padding: 20px;
   overflow-y: auto;
 }
 
 .showcodeComponent {
-  width: 60%;
+  width: 74%;
+  min-width: 400px;
   background-color: rgb(245, 245, 245);
   height: 100%;
   overflow-y: auto;
@@ -147,9 +155,12 @@ watchEffect(() => {
 }
 
 .configurationArea {
-  width: 20%;
-  /* background-color: aqua; */
+  width: 14%;
+  min-width: 300px;
   height: 100%;
+  padding-left: 14px;
+  padding-right: 10px;
+  padding-bottom: 10px;
 }
 
 .leftBox {
@@ -181,7 +192,7 @@ watchEffect(() => {
 
 .chooseBox {
   height: 18px;
-  width: 25%;
+  width: 40%;
   display: flex;
   justify-content: start;
   align-items: center;

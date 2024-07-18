@@ -2,24 +2,43 @@ const lowCodeConfig = {
     basic: [
         {
             name: '输入框',
+            iconName: 'EditPen',
             id: '1',
         },
         {
-            name: 'Jean',
+            name: '多行输入',
             id: '2',
+            iconName: 'EditPen',
+
         },
         {
-            name: 'Johanna',
+            name: '选择器',
             id: '3',
+            iconName: 'EditPen',
+
         },
         {
-            name: 'Juan',
+            name: '开关',
             id: '4',
+            iconName: 'EditPen',
+
+        },
+        {
+            name: '时间选择',
+            id: '5',
+            iconName: 'EditPen',
+
+        },
+        {
+            name: '日期选择',
+            id: '6',
+            iconName: 'EditPen',
+
         },
     ],
     highOrder: [
         {
-            name: '看看',
+            name: '文件上传',
             id: '8',
         },
         {
