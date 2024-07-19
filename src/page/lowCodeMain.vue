@@ -2,8 +2,16 @@
   <div class="codeMain">
     <div class="componentStack">
       <div class="title">基础组件</div>
-      <VueDraggable v-model="basiclist" :animation="150" :group="{ name: 'lowCode', pull: 'clone', put: false }"
-        :sort="false" dragClass="dragClass" class="leftBox" :clone="onClone" @end="endEnvent">
+      <VueDraggable
+        v-model="basiclist"
+        :animation="150"
+        :group="{ name: 'lowCode', pull: 'clone', put: false }"
+        :sort="false"
+        dragClass="dragClass"
+        class="leftBox"
+        :clone="onClone"
+        @end="endEnvent"
+      >
         <div v-for="item in basiclist" :key="item.id" class="chooseBox">
           <el-icon style="margin-right: 4px">
             <component :is="getIcon(item.name)" />
@@ -14,25 +22,51 @@
       <br />
       <br />
       <div class="title">高级组件</div>
-      <VueDraggable v-model="highOrderList" :animation="150" :group="{ name: 'lowCode', pull: 'clone', put: false }"
-        :sort="false" dragClass="dragClass" class="leftBox" :clone="onClone" @end="endEnvent">
+      <VueDraggable
+        v-model="highOrderList"
+        :animation="150"
+        :group="{ name: 'lowCode', pull: 'clone', put: false }"
+        :sort="false"
+        dragClass="dragClass"
+        class="leftBox"
+        :clone="onClone"
+        @end="endEnvent"
+      >
         <div v-for="item in highOrderList" :key="item.id" class="chooseBox">
+          <el-icon style="margin-right: 4px">
+            <component :is="getIcon(item.name)" />
+          </el-icon>
           {{ item.name }}
         </div>
       </VueDraggable>
     </div>
     <div class="showcodeComponent">
-      <VueDraggable v-model="configurationList" :animation="150" group="lowCode" class="rightBox" ghostClass="ghost">
-        <div v-for="item in configurationList" :key="item.id"
-          :class="{ chooseKey: item.id === chooseId, showBox: true }" @click="chooseTab(item)">
-          <div class="renderPanenl">
-            {{ item.name }}
-          </div>
+      <VueDraggable
+        v-model="configurationList"
+        :animation="150"
+        group="lowCode"
+        class="rightBox"
+        ghostClass="ghost"
+      >
+        <div
+          v-for="item in configurationList"
+          :key="item.id"
+          :class="{ chooseKey: item.id === chooseId, showBox: true }"
+          @click="chooseTab(item)"
+        >
+          <RenderComponents />
           <div v-if="item.id === chooseId" class="closePanenl">
-            <el-popconfirm confirm-button-text="是" cancel-button-text="否" @confirm="confirmEvent(item)" title="确认删除?">
+            <el-popconfirm
+              confirm-button-text="是"
+              cancel-button-text="否"
+              @confirm="confirmEvent(item)"
+              title="确认删除?"
+            >
               <template #reference>
                 <el-icon>
-                  <Delete style="height: 20px; width: 20px; color: rgb(251, 83, 86)" />
+                  <Delete
+                    style="height: 20px; width: 20px; color: rgb(251, 83, 86)"
+                  />
                 </el-icon>
               </template>
             </el-popconfirm>
@@ -49,29 +83,36 @@
 <script setup>
 import { ref, watchEffect, markRaw } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus';
-import { Delete, EditPen, Edit, Open, Mouse, Watch, Bell } from '@element-plus/icons-vue';
+import {
+  Delete,
+  EditPen,
+  Edit,
+  Open,
+  Mouse,
+  Watch,
+  Bell,
+  Files,
+} from '@element-plus/icons-vue';
 import { ElPopconfirm } from 'element-plus';
 import lowCodeConfig from '../global.js';
 import Allocation from './allocation/index.vue';
-
-
+import RenderComponents from './renderComponents/index.vue';
 
 const iconList = ref([
-  { name: "输入框", path: markRaw(EditPen) },
-  { name: "多行输入", path: markRaw(Edit) },
-  { name: "选择器", path: markRaw(Mouse) },
-  { name: "开关", path: markRaw(Open) },
-  { name: "时间选择", path: markRaw(Watch) },
-  { name: "日期选择", path: markRaw(Bell) },
-
+  { name: '输入框', path: markRaw(EditPen) },
+  { name: '多行输入', path: markRaw(Edit) },
+  { name: '选择器', path: markRaw(Mouse) },
+  { name: '开关', path: markRaw(Open) },
+  { name: '时间选择', path: markRaw(Watch) },
+  { name: '日期选择', path: markRaw(Bell) },
+  { name: '文件上传', path: markRaw(Files) },
 ]);
 
 const getIcon = (val) => {
   for (let i = 0; i < iconList.value.length; i += 1) {
-    if (iconList.value[i].name === val)
-      return iconList.value[i].path
+    if (iconList.value[i].name === val) return iconList.value[i].path;
   }
-}
+};
 
 // 此刻选中的组件id
 const chooseId = ref('');
@@ -88,7 +129,7 @@ const chooseTab = (val) => {
 };
 
 // 结束拖拽
-const endEnvent = () => { };
+const endEnvent = () => {};
 
 // 删除确定操作
 const confirmEvent = (val) => {
@@ -204,13 +245,6 @@ watchEffect(() => {
   background-color: rgb(175, 223, 245);
 }
 
-.renderPanenl {
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  padding-top: 10px;
-}
-
 .title {
   font-weight: bold;
 }
@@ -226,7 +260,7 @@ watchEffect(() => {
 }
 
 .dragClass {
-  background-color: red;
+  /* background-color: red; */
 }
 
 .ghost {

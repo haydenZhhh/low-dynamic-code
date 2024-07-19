@@ -23,7 +23,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import { ElButton, ElDrawer } from 'element-plus';
 import LowCodeMain from './lowCodeMain.vue';
 
 const drawer2 = ref(false);
