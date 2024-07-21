@@ -1,8 +1,24 @@
 <template>
-  <div class="renderPanenl"></div>
+  <div class="renderPanenl">
+    {{ props.stackVal.name }}
+    <component :is="currentComponent"></component>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { defineProps,ref,defineAsyncComponent } from 'vue'
+
+const props = defineProps({
+  stackVal: Object
+})
+
+const currentComponent = ref(null)
+
+currentComponent.value = defineAsyncComponent(()=>{
+  return import(`./components/${props.stackVal.type}.vue`)
+})
+
+</script>
 
 <style scoped>
 .renderPanenl {

@@ -2,16 +2,8 @@
   <div class="codeMain">
     <div class="componentStack">
       <div class="title">基础组件</div>
-      <VueDraggable
-        v-model="basiclist"
-        :animation="150"
-        :group="{ name: 'lowCode', pull: 'clone', put: false }"
-        :sort="false"
-        dragClass="dragClass"
-        class="leftBox"
-        :clone="onClone"
-        @end="endEnvent"
-      >
+      <VueDraggable v-model="basiclist" :animation="150" :group="{ name: 'lowCode', pull: 'clone', put: false }"
+        :sort="false" dragClass="dragClass" class="leftBox" :clone="onClone" @end="endEnvent">
         <div v-for="item in basiclist" :key="item.id" class="chooseBox">
           <el-icon style="margin-right: 4px">
             <component :is="getIcon(item.name)" />
@@ -22,16 +14,8 @@
       <br />
       <br />
       <div class="title">高级组件</div>
-      <VueDraggable
-        v-model="highOrderList"
-        :animation="150"
-        :group="{ name: 'lowCode', pull: 'clone', put: false }"
-        :sort="false"
-        dragClass="dragClass"
-        class="leftBox"
-        :clone="onClone"
-        @end="endEnvent"
-      >
+      <VueDraggable v-model="highOrderList" :animation="150" :group="{ name: 'lowCode', pull: 'clone', put: false }"
+        :sort="false" dragClass="dragClass" class="leftBox" :clone="onClone" @end="endEnvent">
         <div v-for="item in highOrderList" :key="item.id" class="chooseBox">
           <el-icon style="margin-right: 4px">
             <component :is="getIcon(item.name)" />
@@ -41,32 +25,15 @@
       </VueDraggable>
     </div>
     <div class="showcodeComponent">
-      <VueDraggable
-        v-model="configurationList"
-        :animation="150"
-        group="lowCode"
-        class="rightBox"
-        ghostClass="ghost"
-      >
-        <div
-          v-for="item in configurationList"
-          :key="item.id"
-          :class="{ chooseKey: item.id === chooseId, showBox: true }"
-          @click="chooseTab(item)"
-        >
-          <RenderComponents />
+      <VueDraggable v-model="configurationList" :animation="150" group="lowCode" class="rightBox" ghostClass="ghost">
+        <div v-for="item in configurationList" :key="item.id"
+          :class="{ chooseKey: item.id === chooseId, showBox: true }" @click="chooseTab(item)">
+          <RenderComponents :stackVal="item" />
           <div v-if="item.id === chooseId" class="closePanenl">
-            <el-popconfirm
-              confirm-button-text="是"
-              cancel-button-text="否"
-              @confirm="confirmEvent(item)"
-              title="确认删除?"
-            >
+            <el-popconfirm confirm-button-text="是" cancel-button-text="否" @confirm="confirmEvent(item)" title="确认删除?">
               <template #reference>
                 <el-icon>
-                  <Delete
-                    style="height: 20px; width: 20px; color: rgb(251, 83, 86)"
-                  />
+                  <Delete style="height: 20px; width: 20px; color: rgb(251, 83, 86)" />
                 </el-icon>
               </template>
             </el-popconfirm>
@@ -129,7 +96,7 @@ const chooseTab = (val) => {
 };
 
 // 结束拖拽
-const endEnvent = () => {};
+const endEnvent = () => { };
 
 // 删除确定操作
 const confirmEvent = (val) => {
@@ -144,6 +111,7 @@ const onClone = (element) => {
   const len = configurationList.value.length;
   return {
     name: `${element.name}`,
+    type: element.type,
     id: `${element.id}-${len}`,
   };
 };
