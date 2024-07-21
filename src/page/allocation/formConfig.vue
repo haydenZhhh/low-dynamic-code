@@ -5,7 +5,7 @@
             <div>表单提交接口</div>
         </div>
         <div class="setInput">
-            <el-input style="width: 100%" placeholder="Please input" />
+            <el-input style="width: 100%" placeholder="请输入" />
         </div>
     </div>
 
@@ -18,6 +18,10 @@
 <style>
 .titlePanenl {
     width: 100%;
+}
+
+.setIteamPanenl{
+    margin-bottom: 20px
 }
 
 .icon {
@@ -33,5 +37,6 @@
     align-items: center;
     margin-bottom: 10px;
     height: 16px;
+    line-height: 14px;
 }
 </style>
