@@ -25,6 +25,20 @@ body {
   height: 100vh;
   width: 100vw;
 }
+.el-form-item__label:before {
+  display: inline-block;
+  margin-right: 4px;
+  color: #9e9e9e !important;
+  font-size: 20px !important;
+  font-family: SimSun, sans-serif;
+  content: '';
+  height: 12px;
+  width: 3px;
+  background-color: #1d90ff;
+}
+.el-form-item__label {
+  line-height: 14px;
+}
 
 ::-webkit-scrollbar {
   width: 0.4rem;

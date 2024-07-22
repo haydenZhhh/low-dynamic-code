@@ -1,42 +1,31 @@
 <template>
-    <div class="setIteamPanenl">
-        <div class="setTitle">
-            <div class="icon" />
-            <div>表单提交接口</div>
-        </div>
-        <div class="setInput">
-            <el-input style="width: 100%" placeholder="请输入" />
-        </div>
-    </div>
-
+  <el-form
+    ref="form"
+    :model="formConfig"
+    label-width="auto"
+    label-position="top"
+    size="large"
+  >
+    <el-form-item label="表单提交接口">
+      <el-input v-model="formConfig.formPort" />
+    </el-form-item>
+  </el-form>
 </template>
 
 <script setup>
+import { reactive } from 'vue';
 
+const formConfig = reactive({
+  formPort: '',
+});
 </script>
 
 <style>
 .titlePanenl {
-    width: 100%;
+  width: 100%;
 }
 
-.setIteamPanenl{
-    margin-bottom: 20px
-}
-
-.icon {
-    background-color: rgb(47, 136, 225);
-    height: 14px;
-    width: 4px;
-    margin-right: 4px;
-}
-.setTitle{
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-    margin-bottom: 10px;
-    height: 16px;
-    line-height: 14px;
+.setIteamPanenl {
+  margin-bottom: 20px;
 }
 </style>
