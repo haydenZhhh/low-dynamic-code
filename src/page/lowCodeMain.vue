@@ -97,6 +97,7 @@ import { ElPopconfirm } from 'element-plus';
 import lowCodeConfig from '../global.js';
 import Allocation from './allocation/index.vue';
 import RenderComponents from './renderComponents/index.vue';
+import emitter from '../utils/emitter';
 
 const iconList = ref([
   { name: '输入框', path: markRaw(EditPen) },
@@ -154,6 +155,7 @@ const onClone = (element) => {
 
 watchEffect(() => {
   console.log('最终', configurationList.value);
+  emitter.emit('fianllyConfigurationList', configurationList.value);
 });
 </script>
 

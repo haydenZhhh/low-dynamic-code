@@ -6,18 +6,17 @@
 </template>
 
 <script setup>
-import { defineProps,ref,defineAsyncComponent } from 'vue'
+import { defineProps, shallowRef, defineAsyncComponent } from 'vue';
 
 const props = defineProps({
-  stackVal: Object
-})
+  stackVal: Object,
+});
 
-const currentComponent = ref(null)
+const currentComponent = shallowRef(null);
 
-currentComponent.value = defineAsyncComponent(()=>{
-  return import(`./components/${props.stackVal.type}.vue`)
-})
-
+currentComponent.value = defineAsyncComponent(() => {
+  return import(`./components/${props.stackVal.type}.vue`);
+});
 </script>
 
 <style scoped>
