@@ -1,25 +1,51 @@
 <template>
-  <el-input
-    v-model="inputvalue"
-    style="width: 100%"
-    @input="changeInput"
-    placeholder="请输入"
-  />
+    <div v-if="!props.showRender">
+      {{ store.getters.formConfigValue[props.stackValue.id]?.titleName }}
+    </div>
+    <el-input v-model="inputvalue" @input="changeInput" placeholder="请输入" />
+
+
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import emitter from '../../../utils/emitter';
+import { watch, defineProps,ref } from 'vue';
+import { useStore } from 'vuex';
 
-const inputvalue = ref('');
 
-emitter.on('lowInputConfig', (data) => {
-  console.log('接收', data);
-});
+const store = useStore();
+const inputvalue = ref('')
 
 const changeInput = (val) => {
   inputvalue.value = val;
+  if(props.changeFormValue){
+    props.changeFormValue(val,props.nowConfig);
+
+  }
+  // emit('callParentMethod')
 };
+const props = defineProps({
+  stackValue: Object,
+  showRender: String,
+  changeFormValue: Function,
+  nowConfig:Object
+
+});
+console.log('====加载', props.stackValue, store.getters.formConfigValue)
+
+
+watch(
+  () => store.getters.formConfigValue,
+  (newVal) => {
+    console.log('ppp9999', newVal,)
+  },
+  {
+    deep: true,
+  }
+);
 </script>
 
-<style></style>
+<style scoped>
+.el-form-item {
+  display: block;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="renderPanenl">
-    {{ props.stackVal.name }}
-    <component :is="currentComponent"></component>
+    <!-- {{ props.stackVal.name }} -->
+    <component :is="currentComponent" :stackValue='props.stackVal'></component>
   </div>
 </template>
 
@@ -24,6 +24,9 @@ currentComponent.value = defineAsyncComponent(() => {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+      /* display: block; */
+
   padding: 10px;
+  padding-bottom: 10px;
 }
 </style>
