@@ -1,6 +1,12 @@
 <template>
-  <el-form  :rules="rules" ref="stackForm" :model="stackConfig" label-width="auto"
-    label-position="top" size="large">
+  <el-form
+    :rules="rules"
+    ref="stackForm"
+    :model="stackConfig"
+    label-width="auto"
+    label-position="top"
+    size="large"
+  >
     <el-form-item label="标题" prop="titleName">
       <el-input v-model="stackConfig.titleName" placeholder="请输入" />
     </el-form-item>
@@ -23,7 +29,7 @@ const stackForm = ref();
 const stackConfig = reactive({
   placeholderValue: '',
   keyValue: '',
-  titleName: ''
+  titleName: '',
 });
 
 const props = defineProps({
@@ -31,23 +37,22 @@ const props = defineProps({
 });
 
 const rules = reactive({
-  titleName: [
-    { required: true, message: '请输入组件名称', trigger: 'blur' },
-  ],
-  keyValue: [
-    { required: true, message: '请输入唯一键值', trigger: 'blur' },
-  ],
-})
+  titleName: [{ required: true, message: '请输入组件名称', trigger: 'blur' }],
+  keyValue: [{ required: true, message: '请输入唯一键值', trigger: 'blur' }],
+});
 
 watch(
   () => stackConfig,
   (newVal) => {
-    const tempFormConfigValue = JSON.parse(JSON.stringify(store.getters.formConfigValue))
-    const tempConfig = {
-    }
-    tempConfig[props.stackValue.id] = newVal
-    store.commit("setFormConfigValue", { ...tempFormConfigValue, ...tempConfig });
-
+    const tempFormConfigValue = JSON.parse(
+      JSON.stringify(store.getters.formConfigValue)
+    );
+    const tempConfig = {};
+    tempConfig[props.stackValue.id] = newVal;
+    store.commit('setFormConfigValue', {
+      ...tempFormConfigValue,
+      ...tempConfig,
+    });
   },
   {
     deep: true,

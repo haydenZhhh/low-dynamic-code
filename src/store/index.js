@@ -5,19 +5,20 @@ const store = createStore({
   state: {
     //状态管理器中定义的数据源
     mainFormList: [],
-    formConfigValue:{}
+    formConfigValue: {}
   },
   mutations: {
     // 设置主表单
-    setMainFormList(state, payload){
+    setMainFormList(state, payload) {
       state.mainFormList = payload;
     },
     // 主表单配置项
-    setFormConfigValue(state, payload){
+    setFormConfigValue(state, payload) {
+      // console.log(payload)
       state.formConfigValue = payload;
     },
     // 删除某个配置项
-    deleteFormConfigValue(state, payload){
+    deleteFormConfigValue(state, payload) {
       delete state.formConfigValue[payload]
     }
   },

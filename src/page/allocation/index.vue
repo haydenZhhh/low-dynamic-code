@@ -1,7 +1,10 @@
 <template>
   <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
     <el-tab-pane label="组件属性" name="first">
-      <component :is="stackComponent" :stackValue='props.componentVal'></component>
+      <component
+        :is="stackComponent"
+        :stackValue="props.componentVal"
+      ></component>
     </el-tab-pane>
     <el-tab-pane label="表单属性" name="second">
       <FormConfig />
@@ -12,7 +15,7 @@
 <script setup>
 import { ref, defineProps, watch, defineAsyncComponent, shallowRef } from 'vue';
 import FormConfig from './formConfig.vue';
-import emitter from '../../utils/emitter'
+import emitter from '../../utils/emitter';
 
 const props = defineProps({
   componentVal: Object,
@@ -24,19 +27,19 @@ const stackComponent = shallowRef(null);
 
 emitter.on('deleteSomeStack', () => {
   activeName.value = 'second';
-})
+});
 
 watch(
   () => props.componentVal,
   (value) => {
     if (value) {
-      console.log('---===',value)
+      console.log('---===', value);
       stackComponent.value = defineAsyncComponent(() => {
         return import(`./components/${value.type}.vue`);
       });
       activeName.value = 'first';
-    }else{
-      stackComponent.value = null
+    } else {
+      stackComponent.value = null;
     }
   },
   {
@@ -45,7 +48,7 @@ watch(
 );
 
 const handleClick = (tab, event) => {
-  console.log('====',props)
+  console.log('====', props);
   console.log(tab, event);
 };
 </script>
@@ -54,6 +57,4 @@ const handleClick = (tab, event) => {
 .demo-tabs {
   font-size: 14px;
 }
-
-
 </style>
