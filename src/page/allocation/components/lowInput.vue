@@ -22,6 +22,7 @@
 <script setup>
 import { reactive, ref, watch, defineProps } from 'vue';
 import { useStore } from 'vuex';
+import emitter from '../../../utils/emitter';
 
 const store = useStore();
 
@@ -53,6 +54,7 @@ watch(
       ...tempFormConfigValue,
       ...tempConfig,
     });
+    emitter.emit('storeDataChange');
   },
   {
     deep: true,

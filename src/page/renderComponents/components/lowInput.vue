@@ -7,11 +7,11 @@
 
 <script setup>
 import { watch, defineProps, ref, computed, watchEffect } from 'vue';
-import { useStore, mapState } from 'vuex';
+import { useStore } from 'vuex';
+import emitter from '../../../utils/emitter';
 
 const store = useStore();
 const inputvalue = ref('');
-const { count } = mapState({ count: (state) => state.getters.formConfigValue });
 
 const changeInput = (val) => {
   inputvalue.value = val;
@@ -27,18 +27,29 @@ const props = defineProps({
   nowConfig: Object,
 });
 console.log('====加载', props, store.getters.formConfigValue);
-const counter = computed(() => store.formConfigValue);
+const counter = computed(() => store.state);
 // const temp = toRefs(store.getters.formConfigValue);
-// 监听变化
-watch(counter, (newValue, oldValue) => {
-  console.log(`counter changed from ${oldValue} to ${newValue}`);
+
+emitter.on('storeDataChange', () => {
+  console.log('触发事件', store.getters.formConfigValue);
 });
+
+// 监听变化
+watch(
+  counter,
+  (newValue, oldValue) => {
+    console.log(`counter changed from ${oldValue} to ${newValue}`);
+  },
+  {
+    deep: true,
+  }
+);
 watchEffect(() => {
   console.log('pppp999556466', store.getters.formConfigValue);
 });
 
 watch(
-  () => count,
+  () => store.state.formConfigValue,
   (newVal) => {
     console.log('ppp9999', newVal);
   },
