@@ -8,7 +8,7 @@
 <script setup>
 import { watch, defineProps, ref, computed, watchEffect } from 'vue';
 import { useStore } from 'vuex';
-import emitter from '../../../utils/emitter';
+// import emitter from '../../../utils/emitter';
 
 const store = useStore();
 const inputvalue = ref('');
@@ -26,19 +26,17 @@ const props = defineProps({
   changeFormValue: Function,
   nowConfig: Object,
 });
-console.log('====加载', props, store.getters.formConfigValue);
-const counter = computed(() => store.state);
-// const temp = toRefs(store.getters.formConfigValue);
+const counter = computed(() => store.getters.formConfigValue);
 
-emitter.on('storeDataChange', () => {
-  console.log('触发事件', store.getters.formConfigValue);
-});
+// emitter.on('storeDataChange', () => {
+//   console.log('触发事件', store.getters.formConfigValue);
+// });
 
 // 监听变化
 watch(
   counter,
   (newValue, oldValue) => {
-    console.log(`counter changed from ${oldValue} to ${newValue}`);
+    console.log('=456',newValue,oldValue)
   },
   {
     deep: true,

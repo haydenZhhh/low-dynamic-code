@@ -44,7 +44,7 @@ const renderForm = ref();
 const showFormList = ref(JSON.parse(sessionStorage.getItem('formainFormList')));
 // 组件配置list
 const formConfigList = JSON.parse(sessionStorage.getItem('formData'));
-
+console.log('查看',showFormList)
 const renderFormData = reactive({});
 
 const rules = reactive({
