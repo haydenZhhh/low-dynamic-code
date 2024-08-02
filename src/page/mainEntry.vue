@@ -3,19 +3,18 @@
     <el-button type="primary" @click="openDrawer">表单配置</el-button>
   </div>
 
-  <div style="width: 100%;margin: 40px auto;padding: 10px;">
+  <div style="width: 100%; margin: 40px auto; padding: 10px">
     <el-card style="max-width: 480px">
-    <!-- <p  class="text item">名称</p> -->
-    <div class="cardMain">
-      <div class="leftName">名称</div>
-      <div class="rightBtn">
-        <el-button type="primary" :icon="View" circle @click="handleClick" />
-        <el-button :icon="Edit" circle />
+      <!-- <p  class="text item">名称</p> -->
+      <div class="cardMain">
+        <div class="leftName">名称</div>
+        <div class="rightBtn">
+          <el-button type="primary" :icon="View" circle @click="handleClick" />
+          <el-button :icon="Edit" circle />
+        </div>
       </div>
-    </div>
-  </el-card>
+    </el-card>
   </div>
-
 
   <el-drawer v-model="drawer2" direction="btt" size="100%">
     <template #title>
@@ -38,19 +37,16 @@
   <el-dialog v-model="dialogTableVisible" title="表单查看" width="800">
     <RenderForm />
   </el-dialog>
-
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import LowCodeMain from './lowCodeMain.vue';
 import { useStore } from 'vuex';
-import RenderForm from './renderForm/index.vue'
-import {
-  View,Edit
-} from '@element-plus/icons-vue'
+import RenderForm from './renderForm/index.vue';
+import { View, Edit } from '@element-plus/icons-vue';
 
-const dialogTableVisible = ref(false)
+const dialogTableVisible = ref(false);
 
 const store = useStore();
 
@@ -69,18 +65,35 @@ const cancelClick = () => {
 // 保存配置数据
 const confirmClick = () => {
   drawer2.value = false;
-  console.log('===提交数据', store.getters.formConfigValue)
-  sessionStorage.setItem('formainFormList', JSON.stringify(store.getters.mainFormList))
+  console.log('原来====', store.getters.allFormJsonData);
+  const tempSendData = {
+    formainFormList: JSON.stringify(store.getters.mainFormList),
+    formData: JSON.stringify(store.getters.formConfigValue),
+  };
+  console.log(tempSendData);
+  const tempAllFormJsonData = JSON.parse(
+    JSON.stringify(store.getters.allFormJsonData)
+  );
 
-  sessionStorage.setItem('formData', JSON.stringify(store.getters.formConfigValue))
+  store.commit('setAllFormJsonData', {
+    ...tempAllFormJsonData,
+    ...tempSendData,
+  });
+
+  sessionStorage.setItem(
+    'formainFormList',
+    JSON.stringify(store.getters.mainFormList)
+  );
+
+  sessionStorage.setItem(
+    'formData',
+    JSON.stringify(store.getters.formConfigValue)
+  );
 };
 
-
-
 const handleClick = () => {
-  dialogTableVisible.value = true
-}
-
+  dialogTableVisible.value = true;
+};
 </script>
 
 <style scoped>
@@ -95,11 +108,11 @@ const handleClick = () => {
   padding: 8px;
 }
 
-.cardMain{
+.cardMain {
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
 }
 </style>
