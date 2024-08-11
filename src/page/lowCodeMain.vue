@@ -95,7 +95,7 @@ const basiclist = ref(lowCodeConfig.basic);
 // 高阶组件
 const highOrderList = ref(lowCodeConfig.highOrder);
 
-const configurationList = ref([]);
+const configurationList = ref( store.getters.mainFormList|| []);
 
 // 点击渲染的组件
 const chooseTab = (val) => {

@@ -12,7 +12,7 @@ const lowCodeConfig = {
         },
         {
             name: '选择器',
-            type: 'lowRadio',
+            type: 'lowSelect',
             id: '3',
 
         },

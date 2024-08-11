@@ -1,10 +1,7 @@
 <template>
   <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
     <el-tab-pane label="组件属性" name="first">
-      <component
-        :is="stackComponent"
-        :stackValue="props.componentVal"
-      ></component>
+        <component :is="stackComponent" :stackValue="props.componentVal"></component>
     </el-tab-pane>
     <el-tab-pane label="表单属性" name="second">
       <FormConfig />
@@ -56,5 +53,11 @@ const handleClick = (tab, event) => {
 <style scoped>
 .demo-tabs {
   font-size: 14px;
+   overflow-y: auto;
+
+}
+
+.el-tabs__content {
+  overflow-y: auto;
 }
 </style>

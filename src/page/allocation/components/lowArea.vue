@@ -40,16 +40,18 @@ import emitter from '../../../utils/emitter';
 const store = useStore();
 
 const stackForm = ref();
-const stackConfig = reactive({
+const props = defineProps({
+  stackValue: Object,
+});
+
+const stackConfig = reactive( store.getters.formConfigValue[props.stackValue.id] || {
   placeholderValue: '',
   keyValue: '',
   titleName: '',
   isMustValue: false,
 });
 
-const props = defineProps({
-  stackValue: Object,
-});
+
 
 const rules = reactive({
   titleName: [{ required: true, message: '请输入组件名称', trigger: 'blur' }],

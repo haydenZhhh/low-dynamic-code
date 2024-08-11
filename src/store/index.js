@@ -6,7 +6,8 @@ const store = createStore({
     //状态管理器中定义的数据源
     mainFormList: [],
     formConfigValue: {},
-    allFormJsonData: []
+    formConfig:{},
+    allFormJsonData: [],
   },
   mutations: {
     // 设置主表单
@@ -23,7 +24,11 @@ const store = createStore({
     },
     // 总列表
     setAllFormJsonData(state, payload) {
-      state.setAllFormJsonData = payload;
+      state.allFormJsonData = payload;
+    },
+    // 表单属性
+    setFormConfig(state, payload) {
+      state.formConfig = payload;
     },
   },
   actions: {
@@ -34,7 +39,7 @@ const store = createStore({
     mainFormList: (state) => state.mainFormList,
     formConfigValue: (state) => state.formConfigValue,
     allFormJsonData: (state) => state.allFormJsonData,
-
+    formConfig: (state) => state.formConfig,
   }
 })
 

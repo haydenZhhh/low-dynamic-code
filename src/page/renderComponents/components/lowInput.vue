@@ -29,7 +29,6 @@ const props = defineProps({
 const itemTitle = ref(
   store.getters.formConfigValue[props.stackValue.id]?.titleName
 );
-
 emitter.on('storeDataChange', () => {
   itemTitle.value =
     store.getters.formConfigValue[props.stackValue.id]?.titleName;
