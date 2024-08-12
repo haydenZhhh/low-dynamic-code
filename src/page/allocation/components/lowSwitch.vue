@@ -16,7 +16,7 @@
     <el-form-item label="左边提示语(false)">
       <el-input v-model="stackConfig.leftText" placeholder="请输入" />
     </el-form-item>
-    <el-form-item label="右边边提示语(true)">
+    <el-form-item label="右边提示语(true)">
       <el-input v-model="stackConfig.rightText" placeholder="请输入" />
     </el-form-item>
     <el-form-item label="默认值">

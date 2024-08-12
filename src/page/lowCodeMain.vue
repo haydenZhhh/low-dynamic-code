@@ -233,9 +233,7 @@ watchEffect(() => {
     rgba(250, 250, 250, 1)
   );
 
-  /* background-image: url('../assets/bg.jpg');
-  background-repeat: no-repeat;
-  background-size: 100% 100%; */
+
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;

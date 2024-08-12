@@ -24,7 +24,6 @@
         />
       </div>
 
-      <!-- <el-input v-model="stackConfig.selectData" placeholder="请输入" /> -->
       <div class="dataListMain">
         <el-row v-for="(iteam, index) in stackConfig.selectData" :key="index">
           <el-col :span="10">

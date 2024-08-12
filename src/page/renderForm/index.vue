@@ -52,6 +52,13 @@
           :stackValue="item"
           :showRender="'render'"
         />
+        <lowRadio
+          v-if="item.type === 'lowRadio'"
+          :changeFormValue="parentChangeMethod"
+          :nowConfig="formConfigList[item.id]"
+          :stackValue="item"
+          :showRender="'render'"
+        />
       </el-form-item>
     </div>
   </el-form>
@@ -70,6 +77,7 @@ import lowSelect from '../renderComponents/components/lowSelect.vue';
 import lowSwitch from '../renderComponents/components/lowSwitch.vue';
 import lowTimePicker from '../renderComponents/components/lowTimePicker.vue';
 import lowDatePicker from '../renderComponents/components/lowDatePicker.vue';
+import lowRadio from '../renderComponents/components/lowRadio.vue';
 
 const store = useStore();
 

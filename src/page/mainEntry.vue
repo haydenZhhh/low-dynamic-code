@@ -1,33 +1,27 @@
 <template>
   <div class="mainPage">
     <el-button type="primary" @click="openDrawer">表单配置</el-button>
+
+    <el-affix position="bottom" :offset="20">
+    <el-button type="primary">Offset bottom 20px</el-button>
+  </el-affix>
+
+    <div v-if="showDataList.length > 0" class="showIteam" >
+      <el-card v-for="(iteam, index) in showDataList" :key="index" class="iteamListPanenl" >
+        <!-- <p  class="text item">名称</p> -->
+        <div class="cardMain">
+          <div class="leftName">{{ iteam?.formConfig?.formName }}</div>
+          <div class="rightBtn">
+            <el-button type="primary" :icon="View" circle @click="handleClick(iteam)" />
+            <el-button :icon="Edit" @click="editClick(iteam)" circle />
+            <el-button :icon="Delete" @click="deleteClick(iteam)" circle />
+          </div>
+        </div>
+      </el-card>
+    </div>
   </div>
 
-  <div
-    v-if="showDataList.length > 0"
-    style="width: 100%; margin: 40px auto; padding: 10px"
-  >
-    <el-card
-      v-for="(iteam, index) in showDataList"
-      :key="index"
-      style="max-width: 480px"
-    >
-      <!-- <p  class="text item">名称</p> -->
-      <div class="cardMain">
-        <div class="leftName">{{ iteam?.formConfig?.formName }}</div>
-        <div class="rightBtn">
-          <el-button
-            type="primary"
-            :icon="View"
-            circle
-            @click="handleClick(iteam)"
-          />
-          <el-button :icon="Edit" @click="editClick(iteam)" circle />
-          <el-button :icon="Delete" @click="deleteClick(iteam)" circle />
-        </div>
-      </div>
-    </el-card>
-  </div>
+
 
   <el-drawer v-model="drawer2" destroy-on-close direction="btt" size="100%">
     <template #title>
@@ -47,12 +41,7 @@
     </template>
   </el-drawer>
 
-  <el-dialog
-    destroy-on-close
-    v-model="dialogTableVisible"
-    :title="titleName"
-    width="800"
-  >
+  <el-dialog destroy-on-close v-model="dialogTableVisible" :title="titleName" width="800">
     <RenderForm :isOnlyShow="isOnly" :formValue="nowValue" />
   </el-dialog>
 </template>
@@ -233,9 +222,23 @@ const handleClick = (val) => {
 
 <style scoped>
 .mainPage {
-  padding: 8px;
+  /* padding: 8px; */
+  height: 100%;
+  width: 100%;
+  /* overflow: hidden; */
+  /* background-color: rgba(23, 23, 23,1); */
+  background-image: url('../assets/bg.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
-
+.showIteam{
+  width: 100%;
+   margin: 40px auto;
+}
+.iteamListPanenl{
+  max-width: 480px;
+  margin-left: 10px
+}
 .setPanenl {
   height: 100%;
   width: 100%;
