@@ -34,12 +34,25 @@ const lowCodeConfig = {
             id: '6',
 
         },
+        {
+            name: '单选框',
+            type: 'lowRadio',
+            id: '7',
+
+        },
     ],
     highOrder: [
         {
             name: '文件上传',
             type: 'lowUpload',
             id: '10',
+        },
+    ],
+    custom: [
+        {
+            name: '自定义',
+            type: 'lowSelf',
+            id: '20',
         },
     ]
 }

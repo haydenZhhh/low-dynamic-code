@@ -45,6 +45,29 @@
           {{ item.name }}
         </div>
       </VueDraggable>
+      <br />
+      <br />
+      <div class="title">
+        <div class="colorPanenl" />
+        <div>自定义组件</div>
+      </div>
+      <VueDraggable
+        v-model="customList"
+        :animation="150"
+        :group="{ name: 'lowCode', pull: 'clone', put: false }"
+        :sort="false"
+        dragClass="dragClass"
+        class="leftBox"
+        :clone="onClone"
+        @end="endEnvent"
+      >
+        <div v-for="item in customList" :key="item.id" class="chooseBox">
+          <el-icon style="margin-right: 4px">
+            <component :is="getIcon(item.name)" />
+          </el-icon>
+          {{ item.name }}
+        </div>
+      </VueDraggable>
     </div>
     <div class="showcodeComponent">
       <VueDraggable
@@ -102,6 +125,8 @@ import {
   Watch,
   Bell,
   Files,
+  Pointer,
+  Connection,
 } from '@element-plus/icons-vue';
 import { ElPopconfirm } from 'element-plus';
 import lowCodeConfig from '../global.js';
@@ -118,6 +143,8 @@ const iconList = ref([
   { name: '时间选择', path: markRaw(Watch) },
   { name: '日期选择', path: markRaw(Bell) },
   { name: '文件上传', path: markRaw(Files) },
+  { name: '单选框', path: markRaw(Pointer) },
+  { name: '自定义', path: markRaw(Connection) },
 ]);
 
 const nowComponentVal = ref(null);
@@ -136,6 +163,8 @@ const chooseId = ref('');
 const basiclist = ref(lowCodeConfig.basic);
 // 高阶组件
 const highOrderList = ref(lowCodeConfig.highOrder);
+// 自定义组件
+const customList = ref(lowCodeConfig.custom);
 
 const configurationList = ref(store.getters.mainFormList || []);
 
