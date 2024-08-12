@@ -13,8 +13,15 @@
     <el-form-item label="键值" prop="keyValue">
       <el-input v-model="stackConfig.keyValue" placeholder="请输入" />
     </el-form-item>
-    <el-form-item label="placeholder提示语">
-      <el-input v-model="stackConfig.placeholderValue" placeholder="请输入" />
+    <el-form-item label="日期类型">
+      <el-select v-model="stackConfig.timeType" placeholder="Select">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
     </el-form-item>
     <el-form-item label="是否必填">
       <el-switch
@@ -49,9 +56,25 @@ const stackConfig = reactive(
     placeholderValue: '',
     keyValue: '',
     titleName: '',
+    timeType: 'date',
     isMustValue: false,
   }
 );
+
+const options = [
+  {
+    label: '日',
+    value: 'date',
+  },
+  {
+    label: '年',
+    value: 'year',
+  },
+  {
+    label: '月',
+    value: 'month',
+  },
+];
 
 const rules = reactive({
   titleName: [{ required: true, message: '请输入组件名称', trigger: 'blur' }],

@@ -6,7 +6,7 @@ const store = createStore({
     //状态管理器中定义的数据源
     mainFormList: [],
     formConfigValue: {},
-    formConfig:{},
+    formConfig: {},
     allFormJsonData: [],
   },
   mutations: {
@@ -22,13 +22,13 @@ const store = createStore({
     deleteFormConfigValue(state, payload) {
       delete state.formConfigValue[payload]
     },
-    // 总列表
-    setAllFormJsonData(state, payload) {
-      state.allFormJsonData = payload;
-    },
     // 表单属性
     setFormConfig(state, payload) {
       state.formConfig = payload;
+    },
+    // 总列表:最后提交给后端
+    setAllFormJsonData(state, payload) {
+      state.allFormJsonData = payload;
     },
   },
   actions: {

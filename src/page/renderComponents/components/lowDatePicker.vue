@@ -2,7 +2,13 @@
   <div v-if="props.showRender === 'showSet'">
     {{ itemTitle }}
   </div>
-  <el-input v-model="inputvalue" @input="changeInput" placeholder="请输入" />
+  <el-date-picker
+    v-model="datevalue"
+    :type="chooseType"
+    placeholder="请选择"
+    @change="changePicker"
+    :value-format="getvalueformat()"
+  />
 </template>
 
 <script setup>
@@ -11,7 +17,7 @@ import { useStore } from 'vuex';
 import emitter from '../../../utils/emitter';
 
 const store = useStore();
-const inputvalue = ref('');
+const datevalue = ref('');
 
 const props = defineProps({
   stackValue: Object,
@@ -20,8 +26,25 @@ const props = defineProps({
   nowConfig: Object,
 });
 
-const changeInput = (val) => {
-  inputvalue.value = val;
+const chooseType = ref(
+  store.getters.formConfigValue[props.stackValue.id]?.timeType || 'date'
+);
+
+const getvalueformat = () => {
+  if (chooseType.value === 'date') {
+    return 'YYYY-MM-DD';
+  }
+  if (chooseType.value === 'year') {
+    return 'YYYY';
+  }
+  if (chooseType.value === 'month') {
+    return 'YYYY-MM';
+  }
+  return 'YYYY-MM-DD';
+};
+
+const changePicker = (val) => {
+  datevalue.value = val;
   if (props.changeFormValue) {
     props.changeFormValue(val, props.nowConfig);
   }
@@ -33,6 +56,8 @@ const itemTitle = ref(
 emitter.on('storeDataChange', () => {
   itemTitle.value =
     store.getters.formConfigValue[props.stackValue.id]?.titleName || '';
+  chooseType.value =
+    store.getters.formConfigValue[props.stackValue.id]?.timeType || 'date';
 });
 </script>
 

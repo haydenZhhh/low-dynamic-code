@@ -1,16 +1,64 @@
 <template>
-  <el-form ref="renderForm" :rules="rules" :model="renderFormData" label-width="auto">
+  <el-form
+    ref="renderForm"
+    :rules="rules"
+    :model="renderFormData"
+    label-width="auto"
+  >
     <div v-for="item in showFormList" :key="item.id">
-      <el-form-item  :label="getLabelTitle(item)" :prop="formConfigList[item.id].keyValue">
-        <IowInput v-if="item.type === 'lowInput'" :changeFormValue="parentChangeMethod"
-          :nowConfig="formConfigList[item.id]" :stackValue="item" :showRender="'render'" />
-        <IowArea v-if="item.type === 'lowArea'" :changeFormValue="parentChangeMethod"
-          :nowConfig="formConfigList[item.id]" :stackValue="item" :showRender="'render'" />
+      <el-form-item
+        :label="getLabelTitle(item)"
+        :prop="formConfigList[item.id].keyValue"
+      >
+        <IowInput
+          v-if="item.type === 'lowInput'"
+          :changeFormValue="parentChangeMethod"
+          :nowConfig="formConfigList[item.id]"
+          :stackValue="item"
+          :showRender="'render'"
+        />
+        <IowArea
+          v-if="item.type === 'lowArea'"
+          :changeFormValue="parentChangeMethod"
+          :nowConfig="formConfigList[item.id]"
+          :stackValue="item"
+          :showRender="'render'"
+        />
+        <lowSelect
+          v-if="item.type === 'lowSelect'"
+          :changeFormValue="parentChangeMethod"
+          :nowConfig="formConfigList[item.id]"
+          :stackValue="item"
+          :showRender="'render'"
+        />
+        <lowSwitch
+          v-if="item.type === 'lowSwitch'"
+          :changeFormValue="parentChangeMethod"
+          :nowConfig="formConfigList[item.id]"
+          :stackValue="item"
+          :showRender="'render'"
+        />
+        <lowTimePicker
+          v-if="item.type === 'lowTimePicker'"
+          :changeFormValue="parentChangeMethod"
+          :nowConfig="formConfigList[item.id]"
+          :stackValue="item"
+          :showRender="'render'"
+        />
+        <lowDatePicker
+          v-if="item.type === 'lowDatePicker'"
+          :changeFormValue="parentChangeMethod"
+          :nowConfig="formConfigList[item.id]"
+          :stackValue="item"
+          :showRender="'render'"
+        />
       </el-form-item>
     </div>
   </el-form>
 
-  <el-button type="primary" @click="confirmClick">提交</el-button>
+  <el-button v-if="!props.isOnlyShow" type="primary" @click="confirmClick"
+    >提交</el-button
+  >
 </template>
 
 <script setup>
@@ -18,17 +66,19 @@ import { ref, reactive, defineProps } from 'vue';
 import { useStore } from 'vuex';
 import IowInput from '../renderComponents/components/lowInput.vue';
 import IowArea from '../renderComponents/components/lowArea.vue';
+import lowSelect from '../renderComponents/components/lowSelect.vue';
+import lowSwitch from '../renderComponents/components/lowSwitch.vue';
+import lowTimePicker from '../renderComponents/components/lowTimePicker.vue';
+import lowDatePicker from '../renderComponents/components/lowDatePicker.vue';
 
 const store = useStore();
 
 const renderForm = ref();
 
-
 const props = defineProps({
   formValue: Object,
+  isOnlyShow: Boolean,
 });
-
-
 
 // 中间主组件list
 const showFormList = ref(props.formValue.formainFormList);
@@ -37,18 +87,18 @@ const showFormList = ref(props.formValue.formainFormList);
 const formConfigList = JSON.parse(JSON.stringify(props.formValue.formData));
 const renderFormData = reactive({});
 
-const rules = reactive({
-});
+const rules = reactive({});
 
 // 校验
-if(props.formValue){
+if (props.formValue) {
   Object.keys(props.formValue.formData).forEach((item) => {
-  if (props.formValue.formData[item].isMustValue) {
-    rules[props.formValue.formData[item].keyValue] = [{ required: true,message: '请输入', trigger: 'blur' }]
-  }
-})
+    if (props.formValue.formData[item].isMustValue) {
+      rules[props.formValue.formData[item].keyValue] = [
+        { required: true, message: '请输入', trigger: 'blur' },
+      ];
+    }
+  });
 }
-
 
 Object.keys(formConfigList).forEach((item) => {
   formConfigList[item].id = item;
@@ -57,7 +107,7 @@ Object.keys(formConfigList).forEach((item) => {
 store.commit('setFormConfigValue', formConfigList);
 
 const getLabelTitle = (val) => {
-  return formConfigList[val.id].titleName;
+  return formConfigList[val.id]?.titleName || '';
 };
 
 // 表单提交

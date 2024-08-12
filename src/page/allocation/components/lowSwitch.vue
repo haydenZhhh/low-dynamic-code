@@ -13,18 +13,21 @@
     <el-form-item label="键值" prop="keyValue">
       <el-input v-model="stackConfig.keyValue" placeholder="请输入" />
     </el-form-item>
-    <el-form-item label="placeholder提示语">
-      <el-input v-model="stackConfig.placeholderValue" placeholder="请输入" />
+    <el-form-item label="左边提示语(false)">
+      <el-input v-model="stackConfig.leftText" placeholder="请输入" />
     </el-form-item>
-    <el-form-item label="是否必填">
+    <el-form-item label="右边边提示语(true)">
+      <el-input v-model="stackConfig.rightText" placeholder="请输入" />
+    </el-form-item>
+    <el-form-item label="默认值">
       <el-switch
-        v-model="stackConfig.isMustValue"
+        v-model="stackConfig.defultValue"
         size="large"
         active-text="是"
         inactive-text="否"
         @change="
           (val) => {
-            stackConfig.isMustValue = val;
+            stackConfig.defultValue = val;
           }
         "
       />
@@ -49,7 +52,9 @@ const stackConfig = reactive(
     placeholderValue: '',
     keyValue: '',
     titleName: '',
-    isMustValue: false,
+    leftText: '',
+    rightText: '',
+    defultValue: false,
   }
 );
 

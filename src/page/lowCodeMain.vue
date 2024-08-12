@@ -1,9 +1,20 @@
 <template>
   <div class="codeMain">
     <div class="componentStack">
-      <div class="title">基础组件</div>
-      <VueDraggable v-model="basiclist" :animation="150" :group="{ name: 'lowCode', pull: 'clone', put: false }"
-        :sort="false" dragClass="dragClass" class="leftBox" :clone="onClone" @end="endEnvent">
+      <div class="title">
+        <div class="colorPanenl" />
+        <div>基础组件</div>
+      </div>
+      <VueDraggable
+        v-model="basiclist"
+        :animation="150"
+        :group="{ name: 'lowCode', pull: 'clone', put: false }"
+        :sort="false"
+        dragClass="dragClass"
+        class="leftBox"
+        :clone="onClone"
+        @end="endEnvent"
+      >
         <div v-for="item in basiclist" :key="item.id" class="chooseBox">
           <el-icon style="margin-right: 4px">
             <component :is="getIcon(item.name)" />
@@ -13,9 +24,20 @@
       </VueDraggable>
       <br />
       <br />
-      <div class="title">高级组件</div>
-      <VueDraggable v-model="highOrderList" :animation="150" :group="{ name: 'lowCode', pull: 'clone', put: false }"
-        :sort="false" dragClass="dragClass" class="leftBox" :clone="onClone" @end="endEnvent">
+      <div class="title">
+        <div class="colorPanenl" />
+        <div>高级组件</div>
+      </div>
+      <VueDraggable
+        v-model="highOrderList"
+        :animation="150"
+        :group="{ name: 'lowCode', pull: 'clone', put: false }"
+        :sort="false"
+        dragClass="dragClass"
+        class="leftBox"
+        :clone="onClone"
+        @end="endEnvent"
+      >
         <div v-for="item in highOrderList" :key="item.id" class="chooseBox">
           <el-icon style="margin-right: 4px">
             <component :is="getIcon(item.name)" />
@@ -25,16 +47,36 @@
       </VueDraggable>
     </div>
     <div class="showcodeComponent">
-      <VueDraggable v-model="configurationList" :animation="150" group="lowCode" class="rightBox" ghostClass="ghost">
-       <div class="tipsDral" v-if="configurationList.length === 0">请拖入此处</div>
-        <div v-else v-for="item in configurationList" :key="item.id"
-          :class="{ chooseKey: item.id === chooseId, showBox: true }" @click="chooseTab(item)">
+      <VueDraggable
+        v-model="configurationList"
+        :animation="150"
+        group="lowCode"
+        class="rightBox"
+        ghostClass="ghost"
+      >
+        <div class="tipsDral" v-if="configurationList.length === 0">
+          请拖入此处
+        </div>
+        <div
+          v-else
+          v-for="item in configurationList"
+          :key="item.id"
+          :class="{ chooseKey: item.id === chooseId, showBox: true }"
+          @click="chooseTab(item)"
+        >
           <RenderComponents :stackVal="item" />
           <div v-if="item.id === chooseId" class="closePanenl">
-            <el-popconfirm confirm-button-text="是" cancel-button-text="否" @confirm="confirmEvent(item)" title="确认删除?">
+            <el-popconfirm
+              confirm-button-text="是"
+              cancel-button-text="否"
+              @confirm="confirmEvent(item)"
+              title="确认删除?"
+            >
               <template #reference>
                 <el-icon>
-                  <Delete style="height: 20px; width: 20px; color: rgb(251, 83, 86)" />
+                  <Delete
+                    style="height: 20px; width: 20px; color: rgb(251, 83, 86)"
+                  />
                 </el-icon>
               </template>
             </el-popconfirm>
@@ -66,7 +108,7 @@ import lowCodeConfig from '../global.js';
 import Allocation from './allocation/index.vue';
 import RenderComponents from './renderComponents/index.vue';
 import emitter from '../utils/emitter';
-import {useStore} from 'vuex';
+import { useStore } from 'vuex';
 
 const iconList = ref([
   { name: '输入框', path: markRaw(EditPen) },
@@ -95,7 +137,7 @@ const basiclist = ref(lowCodeConfig.basic);
 // 高阶组件
 const highOrderList = ref(lowCodeConfig.highOrder);
 
-const configurationList = ref( store.getters.mainFormList|| []);
+const configurationList = ref(store.getters.mainFormList || []);
 
 // 点击渲染的组件
 const chooseTab = (val) => {
@@ -104,17 +146,17 @@ const chooseTab = (val) => {
 };
 
 // 结束拖拽
-const endEnvent = () => { };
+const endEnvent = () => {};
 
 // 删除确定操作
 const confirmEvent = (val) => {
-  nowComponentVal.value = null
+  nowComponentVal.value = null;
   configurationList.value = configurationList.value.filter(
     (item) => item.id !== val.id
   );
-  store.commit("deleteFormConfigValue", val.id);
-  emitter.emit('deleteSomeStack', {  })
-  
+  store.commit('deleteFormConfigValue', val.id);
+  emitter.emit('deleteSomeStack', {});
+
   chooseId.value = '';
 };
 
@@ -125,12 +167,12 @@ const onClone = (element) => {
     name: `${element.name}`,
     type: element.type,
     id: `${element.id}-${element.type}-${len}`,
-    configVlaue:{}
+    configVlaue: {},
   };
 };
 
 watchEffect(() => {
-  store.commit("setMainFormList", configurationList.value);
+  store.commit('setMainFormList', configurationList.value);
 });
 </script>
 
@@ -155,7 +197,16 @@ watchEffect(() => {
 .showcodeComponent {
   width: 74%;
   min-width: 400px;
-  background-color: rgb(245, 245, 245);
+  /* background-color: rgb(245, 245, 245); */
+  background: linear-gradient(
+    to right,
+    rgba(240, 240, 240, 1),
+    rgba(250, 250, 250, 1)
+  );
+
+  /* background-image: url('../assets/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%; */
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -206,7 +257,11 @@ watchEffect(() => {
   display: flex;
   justify-content: start;
   align-items: center;
+  /* background-color: rgb(51, 145, 248); */
   background-color: rgb(244, 246, 252);
+  border: 1px solid rgb(115, 179, 244);
+  color: rgb(0, 136, 254);
+  border-radius: 5px;
   cursor: move;
   padding: 8px;
   font-size: 13px;
@@ -230,8 +285,15 @@ watchEffect(() => {
 
 .title {
   font-weight: bold;
+  display: flex;
+  align-items: center;
 }
-
+.colorPanenl {
+  height: 20px;
+  width: 7px;
+  background-color: rgb(64, 169, 255);
+  margin-right: 5px;
+}
 .showComponents {
   width: 100%;
   display: flex;
@@ -266,11 +328,21 @@ watchEffect(() => {
   cursor: pointer;
   border: 1px solid rgb(251, 83, 86);
 }
-.tipsDral{
+.tipsDral {
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 20px;
+  /* 设置文字的渐变背景 */
+  background: linear-gradient(to bottom, rgb(64, 169, 255), #feb47b);
+  /* 使文字不可选中，防止背景显露 */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* 其他样式 */
+  font-weight: bold;
+  /* display: inline-block; */
 }
 </style>
