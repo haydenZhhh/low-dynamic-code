@@ -26,7 +26,22 @@ body {
   height: 100vh;
   width: 100vw;
 }
+* {
+  margin: 0;
+  padding: 0;
+}
 
+body {
+  /* background-image: linear-gradient(
+      to left,
+      rgba(255, 0, 149, 0.2),
+      rgba(0, 247, 255, 0.2)
+    ),
+    url(../img/bg.jpg); */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
 
 ::-webkit-scrollbar {
   width: 0.4rem;

@@ -59,6 +59,20 @@
           :stackValue="item"
           :showRender="'render'"
         />
+        <lowUpload
+          v-if="item.type === 'lowUpload'"
+          :changeFormValue="parentChangeMethod"
+          :nowConfig="formConfigList[item.id]"
+          :stackValue="item"
+          :showRender="'render'"
+        />
+        <lowSelf
+          v-if="item.type === 'lowSelf'"
+          :changeFormValue="parentChangeMethod"
+          :nowConfig="formConfigList[item.id]"
+          :stackValue="item"
+          :showRender="'render'"
+        />
       </el-form-item>
     </div>
   </el-form>
@@ -78,6 +92,8 @@ import lowSwitch from '../renderComponents/components/lowSwitch.vue';
 import lowTimePicker from '../renderComponents/components/lowTimePicker.vue';
 import lowDatePicker from '../renderComponents/components/lowDatePicker.vue';
 import lowRadio from '../renderComponents/components/lowRadio.vue';
+import lowUpload from '../renderComponents/components/lowUpload.vue';
+import lowSelf from '../renderComponents/components/lowSelf.vue';
 
 const store = useStore();
 
