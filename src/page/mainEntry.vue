@@ -9,15 +9,19 @@
         <div class="fg"></div>
       </div>
       <div class="meBox-text">
-        <p>爱好</p>
+        <!-- <p>爱好</p>
         <p>爱好踢足球，计算机</p>
         <p>瞎折腾浪费时间最在行</p>
-        <p>最爱</p>
+        <p>最爱</p> -->
       </div>
       <div class="meBox-Button">
         <a>关于</a>
         <a>联系</a>
       </div>
+    </div>
+
+    <div class="openPanenl">
+      <a>表单配置</a>
     </div>
 
     <!-- 页脚 -->
@@ -27,28 +31,48 @@
       </p>
       <p>同时也支持自定义扩展组件</p>
     </div>
-    <!-- v-if="showDataList.length > 0" -->
-    <div class="showIteam">
-      <el-card
-        v-for="(iteam, index) in showDataList"
-        :key="index"
-        class="iteamListPanenl"
-      >
-        <!-- <p  class="text item">名称</p> -->
-        <div class="cardMain">
-          <div class="leftName">{{ iteam?.formConfig?.formName }}</div>
-          <div class="rightBtn">
-            <el-button
-              type="primary"
-              :icon="View"
-              circle
-              @click="handleClick(iteam)"
-            />
-            <el-button :icon="Edit" @click="editClick(iteam)" circle />
-            <el-button :icon="Delete" @click="deleteClick(iteam)" circle />
-          </div>
+
+    <!-- 伪终端介绍 -->
+    <div id="cmdBox">
+      <!-- 第一个终端 -->
+      <div class="cmd">
+        <!-- 三个按钮 -->
+        <div class="click">
+          <div class="red"></div>
+          <div class="yellow"></div>
+          <div class="green"></div>
         </div>
-      </el-card>
+        <!-- 顶部标题 -->
+        <div class="title">
+          <span>表单配置列表</span>
+        </div>
+        <!-- 终端内文字 -->
+        <div class="cmdText">
+          <span style="color: rgb(0, 190, 0)">root@zhlowcode</span>
+          <span style="color: blue">~</span>
+          <span style="color: rgb(39, 39, 39)">./zhlowcode.sh</span>
+          <br />
+          <!--  -->
+          <br />
+          <span style="color: rgb(0, 190, 0)">root@zhlowcode</span>
+          <span style="color: blue">~</span>
+          <span style="color: rgb(39, 39, 39)">lowcode /list.txt</span>
+          <div
+            class="showLowCodeList"
+            v-for="(iteam, index) in showDataList"
+            :key="index"
+          >
+            <div class="codeFormName">{{ iteam?.formConfig?.formName }}</div>
+            <div class="codeFormBtn" @click="handleClick(iteam)">查看</div>
+            <div class="codeFormBtn" @click="editClick(iteam)">编辑</div>
+            <div class="codeFormBtn" @click="deleteClick(iteam)">删除</div>
+          </div>
+          <br />
+          <!-- <span style="color: rgb(0, 190, 0)">root@kapsiz</span>
+          <span style="color: blue">~</span>
+          <span style="color: rgb(39, 39, 39)">sudo rm -rf /过去的自己/*</span> -->
+        </div>
+      </div>
     </div>
   </div>
 
@@ -85,7 +109,7 @@ import { ref } from 'vue';
 import LowCodeMain from './lowCodeMain.vue';
 import { useStore } from 'vuex';
 import RenderForm from './renderForm/index.vue';
-import { View, Edit, Delete } from '@element-plus/icons-vue';
+// import { View, Edit, Delete } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 
 const dialogTableVisible = ref(false);
@@ -255,6 +279,117 @@ const handleClick = (val) => {
 </script>
 
 <style scoped>
+.showLowCodeList {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+.codeFormName {
+  font-size: 16px;
+  font-weight: 500;
+}
+.codeFormBtn {
+  color: #1890ff;
+  margin-left: 10px;
+  cursor: pointer;
+}
+#cmdBox {
+  width: 710px;
+  height: 550px;
+  position: absolute;
+  top: 10%;
+  right: 2%;
+  /* background-color: green; */
+}
+
+.cmd {
+  width: 600px;
+  height: 400px;
+  border-radius: 10px 10px 5px 5px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s;
+  font-size: 14px;
+  color: rgb(88, 89, 92);
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.cmd:hover {
+  width: 610px;
+  height: 410px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  margin: -5px 0 0 -5px;
+  z-index: 1;
+}
+
+.cmd .title {
+  width: 100%;
+  height: 25px;
+  background-image: linear-gradient(to top, rgb(184, 184, 184), white);
+  font-size: 14px;
+  line-height: 25px;
+}
+
+.cmd .title span {
+  display: inline-block;
+  width: 70%;
+  text-align: center;
+  /* background-color: red; */
+}
+
+.cmd .click {
+  margin-left: 10px;
+  float: left;
+}
+
+.cmd .click div {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 8px 0 0 10px;
+  float: left;
+}
+
+.cmd .click .red {
+  background-color: #ff1b22;
+  box-shadow: 0 0 1px #ff1b22;
+}
+
+.cmd .click .red:hover {
+  background-color: #ff6268;
+  box-shadow: 0 0 3px #ff1b22;
+}
+
+.cmd .click .yellow {
+  background-color: #ffaf00;
+  box-shadow: 0 0 1px #ffaf00;
+}
+
+.cmd .click .yellow:hover {
+  background-color: #ffd373;
+  box-shadow: 0 0 3px #ffaf00;
+}
+
+.cmd .click .green {
+  background-color: #00931a;
+  box-shadow: 0 0 1px #00931a;
+}
+
+.cmd .click .green:hover {
+  background-color: rgb(0, 196, 36);
+  box-shadow: 0 0 3px #00931a;
+}
+
+.cmdText {
+  padding-top: 10px;
+  padding-left: 15px;
+}
+
+/* ========== */
+
 .mainPage {
   height: 100%;
   width: 100%;
@@ -269,10 +404,13 @@ const handleClick = (val) => {
   background-size: cover;
 }
 .showIteam {
-  width: 50%;
-  height: 40%;
-  float: right;
+  width: 40%;
+  height: 45%;
+  position: absolute;
+  top: 10%;
+  right: 2%;
   border: 1px solid red;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .iteamListPanenl {
   max-width: 480px;
@@ -293,12 +431,77 @@ const handleClick = (val) => {
   align-items: center;
 }
 
+.openPanenl {
+  position: absolute;
+  bottom: 20px;
+  left: 100px;
+}
+
+.openPanenl a {
+  /* 相对定位 */
+  position: relative;
+  width: 400px;
+  height: 100px;
+  padding: 15px;
+  line-height: 100px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  /* 渐变背景 */
+  background: linear-gradient(to right, #03a9f4, #f441a5, #ffeb3b, #09a8f4);
+  /* 背景渐变色大小 */
+  background-size: 400%;
+  /* 圆角 */
+  border-radius: 17px;
+  z-index: 1;
+  box-shadow: 0 1px 5px #fff;
+  animation: streamer 8s infinite;
+}
+/* 发光效果 */
+.openPanenl a::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  bottom: -5px;
+  right: -5px;
+  /* 渐变背景 */
+  background: linear-gradient(to right, #03a9f4, #f441a5, #ffeb3b, #09a8f4);
+  /* 背景渐变色大小 */
+  background-size: 400%;
+  /* 圆角 */
+  border-radius: 50px;
+  /* 位于按钮之下 */
+  z-index: -1;
+  /* 设置模糊度 显示发光效果 */
+  filter: blur(20px);
+}
+/* 鼠标移入执行动画 */
+/* .openPanenl a:hover {
+  animation: streamer 8s infinite;
+} */
+.openPanenl a:hover::before {
+  animation: streamer 8s infinite;
+}
+/* 接下来定义动画 */
+@keyframes streamer {
+  100% {
+    /* 背景位置 */
+    background-position: -400% 0;
+  }
+}
+
 .meBox {
-  float: left;
+  /* float: left; */
+  position: absolute;
   width: 20rem;
   height: 25rem;
   background-color: white;
-  margin-top: 100px;
+  margin-top: 10%;
   margin-left: 10%;
   border-radius: 2%;
   transition: all 0.3s;
@@ -308,7 +511,7 @@ const handleClick = (val) => {
 .meBox:hover {
   width: 21rem;
   height: 26rem;
-  margin: 95px 0 0 9.5%;
+  margin: 9.5% 0 0 9.5%;
 }
 
 .headPhoto {
@@ -453,71 +656,5 @@ const handleClick = (val) => {
 
 #footer a:hover {
   color: rgb(0, 81, 255);
-}
-
-/* 自适应 */
-@media screen and (max-width: 1250px) {
-  .meBox {
-    margin-left: 3%;
-  }
-
-  .meBox:hover {
-    width: 21rem;
-    height: 26rem;
-    margin: 95px 0 0 2.5%;
-  }
-}
-
-@media screen and (max-width: 1110px) {
-  .meBox {
-    float: none;
-    margin: 100px auto 100px;
-  }
-
-  .meBox:hover {
-    width: 21rem;
-    height: 26rem;
-    margin: 95px auto 95px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .meBox {
-    width: 300px;
-  }
-
-  .meBox:hover {
-    width: 300px;
-    height: 25rem;
-    margin: 100px auto 100px;
-  }
-
-  .meBox-Button a:hover {
-    color: rgb(0, 132, 255);
-  }
-
-  .meBox:hover .meBox-Button a {
-    width: 150px;
-    margin-top: 0;
-  }
-
-  .meBox:hover .meBox-title p {
-    font-size: 1.2rem;
-  }
-
-  .meBox:hover .headPhoto {
-    width: 8rem;
-    height: 8rem;
-    margin: -0.5rem 0 0 -4rem;
-    transform: rotate(360deg);
-  }
-
-  .meBox:hover .meBox-text {
-    font-size: 1rem;
-  }
-
-  .meBox-Button a {
-    width: 150px;
-  }
 }
 </style>
