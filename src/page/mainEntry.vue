@@ -284,9 +284,11 @@ const handleClick = (val) => {
   flex-direction: row;
   justify-content: start;
   align-items: center;
+  height: 20px;
+  margin-bottom: 15px;
 }
 .codeFormName {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
 }
 .codeFormBtn {
