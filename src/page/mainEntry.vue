@@ -274,6 +274,7 @@ const confirmClick = () => {
 const handleClick = (val) => {
   titleName.value = val.formConfig.formName;
   nowValue.value = val;
+  isOnly.value = false;
   dialogTableVisible.value = true;
 };
 </script>
