@@ -20,8 +20,15 @@
       </div>
     </div>
 
-    <div class="openPanenl">
-      <a>表单配置</a>
+    <!-- <div class="openPanenl">
+      <a>表单配置</a> -->
+    <div class="openPanenltext" @click="openDrawer">
+      <p>打开表单配置</p>
+      <el-icon><DArrowRight /></el-icon>
+      <!-- <a>表单配置</a> -->
+      <!-- <el-button type="primary" size="large" link :icon="FullScreen"
+        >打开表单配置</el-button
+      > -->
     </div>
 
     <!-- 页脚 -->
@@ -109,7 +116,7 @@ import { ref } from 'vue';
 import LowCodeMain from './lowCodeMain.vue';
 import { useStore } from 'vuex';
 import RenderForm from './renderForm/index.vue';
-// import { View, Edit, Delete } from '@element-plus/icons-vue';
+import { DArrowRight } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 
 const dialogTableVisible = ref(false);
@@ -197,10 +204,10 @@ const deleteClick = (val) => {
 };
 
 // 打开配置页面
-// const openDrawer = () => {
-//   drawer2.value = true;
-//   console.log(store.getters.allFormJsonData);
-// };
+const openDrawer = () => {
+  drawer2.value = true;
+  console.log(store.getters.allFormJsonData);
+};
 
 // 取消
 const cancelClick = () => {
@@ -280,6 +287,23 @@ const handleClick = (val) => {
 </script>
 
 <style scoped>
+.openPanenltext {
+  font-size: 20px;
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  color: #fff;
+  /* line-height: 20px;
+  text-align: center; */
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.openPanenltext p {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
 .showLowCodeList {
   display: flex;
   flex-direction: row;
@@ -394,7 +418,7 @@ const handleClick = (val) => {
 /* ========== */
 
 .mainPage {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-image: linear-gradient(
       to left,
@@ -436,7 +460,7 @@ const handleClick = (val) => {
 
 .openPanenl {
   position: absolute;
-  bottom: 20px;
+  top: 20px;
   left: 100px;
 }
 
@@ -445,7 +469,7 @@ const handleClick = (val) => {
   position: relative;
   width: 400px;
   height: 100px;
-  padding: 15px;
+  padding: 10px;
   line-height: 100px;
   text-align: center;
   cursor: pointer;
@@ -543,6 +567,7 @@ const handleClick = (val) => {
 .meBox-title {
   width: auto;
   margin: 0 auto;
+  text-align: center;
 }
 
 @keyframes typing {
