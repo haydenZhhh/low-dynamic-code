@@ -4,6 +4,7 @@ import store from './store/index'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import './index.css'
+import './utils/rem.js'
 
 
 

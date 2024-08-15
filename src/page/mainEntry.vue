@@ -499,12 +499,11 @@ const handleClick = (val) => {
 }
 
 .meBox {
-  /* float: left; */
-  position: absolute;
-  width: 20rem;
-  height: 25rem;
+  float: left;
+  width: 23rem;
+  height: 28rem;
   background-color: white;
-  margin-top: 10%;
+  margin-top: 12%;
   margin-left: 10%;
   border-radius: 2%;
   transition: all 0.3s;
@@ -512,9 +511,9 @@ const handleClick = (val) => {
 }
 
 .meBox:hover {
-  width: 21rem;
-  height: 26rem;
-  margin: 9.5% 0 0 9.5%;
+  width: 24rem;
+  height: 29rem;
+  margin: 11.5% 0 0 9.5%;
 }
 
 .headPhoto {
@@ -559,7 +558,7 @@ const handleClick = (val) => {
 }
 
 .meBox-title p {
-  font-size: 18px;
+  font-size: 1.5rem;
   font-weight: bold;
   border-right: 0.1em solid;
   width: 12ch;
@@ -572,7 +571,7 @@ const handleClick = (val) => {
 }
 
 .meBox:hover .meBox-title p {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
 }
 
 .meBox-title .fg {
@@ -629,6 +628,7 @@ const handleClick = (val) => {
   text-decoration: none;
   color: gray;
   transition: all 0.3s;
+  cursor: pointer;
 }
 
 .meBox-Button a:hover {

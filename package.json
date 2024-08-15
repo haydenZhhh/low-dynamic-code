@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "element-plus": "^2.7.6",
     "mitt": "^3.0.1",
+    "postcss-px2rem": "^0.3.0",
     "react-dnd-html5-backend": "^16.0.1",
     "vue": "^3.0.0",
     "vue-draggable-plus": "^0.5.2",
