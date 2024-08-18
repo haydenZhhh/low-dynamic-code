@@ -18,7 +18,7 @@
       </div>
       <div class="meBox-Button">
         <a>
-          <el-popover popper-class="popperClass" :popper-style="{ width: '' }" placement='top-end' title=""
+          <el-popover popper-class="popperClass"  :popper-style="{ width: '' }" placement='top' title=""
             trigger="hover">
             <div class="codeimg">
               <p>“没有怎么注重样式</p>
