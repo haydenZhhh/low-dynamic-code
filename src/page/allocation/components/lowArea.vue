@@ -13,9 +13,9 @@
     <el-form-item label="键值" prop="keyValue">
       <el-input v-model="stackConfig.keyValue" placeholder="请输入" />
     </el-form-item>
-    <el-form-item label="placeholder提示语">
+    <!-- <el-form-item label="placeholder提示语">
       <el-input v-model="stackConfig.placeholderValue" placeholder="请输入" />
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="是否必填">
       <el-switch
         v-model="stackConfig.isMustValue"
@@ -45,7 +45,7 @@ const props = defineProps({
 });
 
 const stackConfig = reactive( store.getters.formConfigValue[props.stackValue.id] || {
-  placeholderValue: '',
+  // placeholderValue: '',
   keyValue: '',
   titleName: '',
   isMustValue: false,

@@ -17,16 +17,48 @@
         <p>希望能和大家多多交流</p>
       </div>
       <div class="meBox-Button">
-        <a>关于</a>
-        <a>联系</a>
+        <a>
+          <el-popover popper-class="popperClass" :popper-style="{ width: '' }" placement='top-end' title=""
+            trigger="hover">
+            <div class="codeimg">
+              <p>“没有怎么注重样式</p>
+              <p>只简单弄了一下，可能会有小bug”</p>
+              <p>框架使用的是vue3</p>
+              <p>里面没有很多的组件</p>
+              <p>后续我会继续完善</p>
+              <p>争取把这个系统做到更好更细</p>
+              <p>同时我也有想法</p>
+              <p>以后空余时间把这个系统扩展成个人博客</p>
+              <p>里面包含所有一些前端的比较新的技术</p>
+              <p>再使用微前端将其他有意思的系统统一到此处</p>
+              <p>。。。。。。</p>
+            </div>
+            <template #reference>
+              关于
+            </template>
+          </el-popover>
+        </a>
+        <a>
+          <el-popover popper-class="popperClass" :popper-style="{ width: '' }" placement="top-start" title=""
+            trigger="hover">
+            <div class="codeimg">
+              <img src="../assets/vxcode.jpg" alt="">
+            </div>
+            <template #reference>
+              联系
+            </template>
+          </el-popover>
+        </a>
       </div>
     </div>
 
     <!-- <div class="openPanenl">
       <a>表单配置</a> -->
     <div class="openPanenltext" @click="openDrawer">
-      <p>打开表单配置</p>
-      <el-icon><DArrowRight /></el-icon>
+      <p>点击打开表单配置</p>
+      <!-- <el-icon>
+        <DArrowRight />
+      </el-icon> -->
       <!-- <a>表单配置</a> -->
       <!-- <el-button type="primary" size="large" link :icon="FullScreen"
         >打开表单配置</el-button
@@ -36,9 +68,9 @@
     <!-- 页脚 -->
     <div id="footer">
       <p>
-        个人纯手写低代码平台，目前解决了表单常规配置，基本可以满足平常的普通表单开发
+        作者：ZH
       </p>
-      <p>同时也支持自定义扩展组件</p>
+      <p>邮箱：1300450091@qq.com</p>
     </div>
 
     <!-- 伪终端介绍 -->
@@ -57,20 +89,16 @@
         </div>
         <!-- 终端内文字 -->
         <div class="cmdText">
-          <span style="color: rgb(0, 190, 0)">root@zhlowcode</span>
+          <!-- <span style="color: rgb(0, 190, 0)">root@zhlowcode</span>
           <span style="color: blue">~</span>
-          <span style="color: rgb(39, 39, 39)">./zhlowcode.sh</span>
-          <br />
+          <span style="color: rgb(39, 39, 39)">cd lowcode</span>
+          <br /> -->
           <!--  -->
           <br />
           <span style="color: rgb(0, 190, 0)">root@zhlowcode</span>
           <span style="color: blue">~</span>
           <span style="color: rgb(39, 39, 39)">lowcode /list.txt</span>
-          <div
-            class="showLowCodeList"
-            v-for="(iteam, index) in showDataList"
-            :key="index"
-          >
+          <div class="showLowCodeList" v-for="(iteam, index) in showDataList" :key="index">
             <div class="codeFormName">{{ iteam?.formConfig?.formName }}</div>
             <div class="codeFormBtn" @click="handleClick(iteam)">查看</div>
             <div class="codeFormBtn" @click="editClick(iteam)">编辑</div>
@@ -103,12 +131,7 @@
     </template>
   </el-drawer>
 
-  <el-dialog
-    destroy-on-close
-    v-model="dialogTableVisible"
-    :title="titleName"
-    width="800"
-  >
+  <el-dialog destroy-on-close v-model="dialogTableVisible" :title="titleName" width="800">
     <RenderForm :isOnlyShow="isOnly" :formValue="nowValue" />
   </el-dialog>
 </template>
@@ -118,14 +141,14 @@ import { ref } from 'vue';
 import LowCodeMain from './lowCodeMain.vue';
 import { useStore } from 'vuex';
 import RenderForm from './renderForm/index.vue';
-import { DArrowRight } from '@element-plus/icons-vue';
+// import { DArrowRight } from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 
 const dialogTableVisible = ref(false);
 
 const store = useStore();
 
-const drawer2 = ref(true);
+const drawer2 = ref(false);
 
 const nowValue = ref(null);
 
@@ -289,6 +312,21 @@ const handleClick = (val) => {
 </script>
 
 <style scoped>
+.popperClass {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.codeimg {
+  margin: 0 auto;
+}
+
+.codeimg img {
+  height: 200px;
+  width: 200px;
+}
+
 .openPanenltext {
   font-size: 20px;
   position: absolute;
@@ -297,11 +335,13 @@ const handleClick = (val) => {
   color: #fff;
   /* line-height: 20px;
   text-align: center; */
-  font-weight: 500;
+  font-weight: bold;
   display: flex;
   align-items: center;
   cursor: pointer;
+  text-shadow: 5px -5px 3px #333;
 }
+
 .openPanenltext p {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
@@ -314,15 +354,18 @@ const handleClick = (val) => {
   height: 20px;
   margin-bottom: 15px;
 }
+
 .codeFormName {
   font-size: 18px;
   font-weight: 500;
 }
+
 .codeFormBtn {
   color: #1890ff;
   margin-left: 10px;
   cursor: pointer;
 }
+
 #cmdBox {
   width: 710px;
   height: 550px;
@@ -422,16 +465,15 @@ const handleClick = (val) => {
 .mainPage {
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(
-      to left,
+  background-image: linear-gradient(to left,
       rgba(255, 0, 149, 0.2),
-      rgba(0, 247, 255, 0.2)
-    ),
+      rgba(0, 247, 255, 0.2)),
     url('../assets/bg.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
+
 .showIteam {
   width: 40%;
   height: 45%;
@@ -441,10 +483,12 @@ const handleClick = (val) => {
   border: 1px solid red;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 .iteamListPanenl {
   max-width: 480px;
   margin-left: 10px;
 }
+
 .setPanenl {
   height: 100%;
   width: 100%;
@@ -490,6 +534,7 @@ const handleClick = (val) => {
   box-shadow: 0 1px 5px #fff;
   animation: streamer 8s infinite;
 }
+
 /* 发光效果 */
 .openPanenl a::before {
   content: '';
@@ -509,6 +554,7 @@ const handleClick = (val) => {
   /* 设置模糊度 显示发光效果 */
   filter: blur(20px);
 }
+
 /* 鼠标移入执行动画 */
 /* .openPanenl a:hover {
   animation: streamer 8s infinite;
@@ -516,6 +562,7 @@ const handleClick = (val) => {
 .openPanenl a:hover::before {
   animation: streamer 8s infinite;
 }
+
 /* 接下来定义动画 */
 @keyframes streamer {
   100% {
