@@ -2,39 +2,20 @@
 
 #### 介绍
 
-低代码平台
-
-#### 软件架构
-
-软件架构说明
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
+表单配置低代码平台，满足日常开发普通工作流所需，支持自定义扩展
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  配置主页面
+   <img width="2559" height="1404" alt="image" src="https://github.com/user-attachments/assets/e94e88ce-cf1e-4afd-bf02-8c7c9f0c7104" />
 
-#### 参与贡献
+3.  组件支持自定义扩展等
+   <img width="2559" height="1392" alt="image" src="https://github.com/user-attachments/assets/5e20b12f-1e10-4422-b2a5-1a220f8c1ecd" />
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+5.  配置出来的效果
+   <img width="2559" height="1375" alt="image" src="https://github.com/user-attachments/assets/6f42ce00-daef-4a88-b431-b0be6e1aeefd" />
 
-#### 特技
 
-1.  使用 Readme_XXX.md 来支持不同的语言，例如 Readme_en.md, Readme_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
 
 # low-dynamic-code
 
